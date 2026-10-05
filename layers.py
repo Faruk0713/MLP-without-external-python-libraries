@@ -1,7 +1,30 @@
 from perceptron import perceptron
 from activation_function import phi
 
-inputs = [0.1, 0.1, 0.2]
-weights = [0.2, 0.5, 0.5, 0.5]
-neuron = perceptron(inputs, weights, phi.sigmoid)
-print(neuron.output)
+class InputLayer:
+
+    def __init__(self, n):
+        self.layer = []
+        for i in range(n):
+            neuron = perceptron([1], [1], phi.linear)
+            self.layer.append(neuron)
+        self.output = []
+        for i in range(n):
+            self.output.append(self.layer[i].output)
+        
+class HiddenLayer:
+
+    def __init__(self, n, previous_layer):
+        self.layer = []
+        for i in range(n):
+            neuron = perceptron(previous_layer.output, [0.5]*(len(previous_layer.output)+1), phi.sigmoid)
+            self.layer.append(neuron)
+        self.output = []
+        for i in range(n):
+            self.output.append(self.layer[i].output)
+
+
+class OutputLayer:
+    def __init__(self, previous_layer):
+        neuron = perceptron(previous_layer.output, [0.5]*(len(previous_layer.output)+1), phi.sigmoid)
+        self.output = neuron.output

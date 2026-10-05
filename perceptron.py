@@ -10,13 +10,6 @@ class perceptron:
         for i in range(len(self.inputs)):
             vk = vk + self.inputs[i]*self.weights[i]
         self.output = self.activation(vk)
-
-    # def output(self):
-    #     vk = self.bias
-    #     for i in range(len(self.inputs)):
-    #         vk = vk + self.inputs[i]*self.weights[i]
-    #     result = self.activation(vk)
-    #     return result 
         
     def show_params(self):
         print("Bias = ", self.bias)
